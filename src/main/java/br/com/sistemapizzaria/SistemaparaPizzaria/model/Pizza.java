@@ -1,12 +1,9 @@
 package br.com.sistemapizzaria.SistemaparaPizzaria.model;
 
-import br.com.sistemapizzaria.SistemaparaPizzaria.enums.Sabor;
-import br.com.sistemapizzaria.SistemaparaPizzaria.enums.Tamanho;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "PIZZA")
@@ -16,19 +13,16 @@ public class Pizza implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "TAMANHO")
     @NotNull
-    private Tamanho tamanho;
+    private String tamanho;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "SABOR")
     @NotNull
-    private Sabor sabor;
+    private String sabor;
 
-    @Temporal(TemporalType.TIME)
     @Column(name = "TEMPO_PREPARO")
-    private Date tempoPreparo;
+    private String tempoPreparo;
 
     @Column(name = "VALOR_TOTAL")
     private Double valorTotal;
@@ -36,27 +30,30 @@ public class Pizza implements Serializable {
     @Column(name = "VALOR_PIZZA")
     private Double valorPizza;
 
-    public Tamanho getTamanho() {
+    @OneToMany(mappedBy = "pizza", cascade = CascadeType.ALL)
+    private List<Adicional> adicionalList;
+
+    public String getTamanho() {
         return tamanho;
     }
 
-    public void setTamanho(Tamanho tamanho) {
+    public void setTamanho(String tamanho) {
         this.tamanho = tamanho;
     }
 
-    public Sabor getSabor() {
+    public String getSabor() {
         return sabor;
     }
 
-    public void setSabor(Sabor sabor) {
+    public void setSabor(String sabor) {
         this.sabor = sabor;
     }
 
-    public Date getTempoPreparo() {
+    public String getTempoPreparo() {
         return tempoPreparo;
     }
 
-    public void setTempoPreparo(Date tempoPreparo) {
+    public void setTempoPreparo(String tempoPreparo) {
         this.tempoPreparo = tempoPreparo;
     }
 
@@ -74,5 +71,13 @@ public class Pizza implements Serializable {
 
     public void setValorPizza(Double valorPizza) {
         this.valorPizza = valorPizza;
+    }
+
+    public List<Adicional> getAdicionalList() {
+        return adicionalList;
+    }
+
+    public void setAdicionalList(List<Adicional> adicionalList) {
+        this.adicionalList = adicionalList;
     }
 }
