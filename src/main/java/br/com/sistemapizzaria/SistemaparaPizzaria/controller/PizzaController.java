@@ -1,20 +1,19 @@
 package br.com.sistemapizzaria.SistemaparaPizzaria.controller;
 
-import br.com.sistemapizzaria.SistemaparaPizzaria.dto.PizzaDto;
-import br.com.sistemapizzaria.SistemaparaPizzaria.dto.PizzaDtoComTempoEPreco;
+import br.com.sistemapizzaria.SistemaparaPizzaria.Response.Response;
+import br.com.sistemapizzaria.SistemaparaPizzaria.dto.Pizza.PizzaDto;
+import br.com.sistemapizzaria.SistemaparaPizzaria.dto.Pizza.PizzaDtoComTempoEPreco;
 import br.com.sistemapizzaria.SistemaparaPizzaria.model.Pizza;
-import br.com.sistemapizzaria.SistemaparaPizzaria.service.PizzaService;
+import br.com.sistemapizzaria.SistemaparaPizzaria.service.Pizza.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "api/pizzaria")
@@ -24,7 +23,7 @@ public class PizzaController {
     private PizzaService pizzaService;
 
     @PostMapping(value = "/montarPizza")
-    public ResponseEntity<?> montarPizza(@Valid @RequestBody PizzaDto pizzaDto, BindingResult result) throws ParseException {
+    public ResponseEntity<?> montarPizza(@Valid @RequestBody PizzaDto pizzaDto) throws ParseException {
         Pizza pizza = new Pizza();
         try {
             PizzaDtoComTempoEPreco pizzaDtoComTempoEPreco = pizzaService.validaTamhoESaborPizza(pizzaDto);
@@ -36,4 +35,25 @@ public class PizzaController {
         return new ResponseEntity<>(pizza, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/findAllPizza")
+    public ResponseEntity<?> findAllPizza() {
+        List<Pizza> pizzas = new ArrayList<Pizza>();
+        try {
+            pizzas = pizzaService.findAll();
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Não foi localizado nenhuma pizza cadastrada no sistema. " + HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.ok(pizzas);
+    }
+
+    @GetMapping(value = "/findPizzaById/{id}")
+    public ResponseEntity<?> findPizzaById(@PathVariable("id") Long id) {
+        Pizza pizza = new Pizza();
+        try {
+            pizza = pizzaService.findBy(id);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Não foi localizado a pizza com id: " + id + "," + HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(pizza, HttpStatus.OK);
+    }
 }

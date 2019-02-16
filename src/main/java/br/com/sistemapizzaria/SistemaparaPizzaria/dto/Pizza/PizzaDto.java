@@ -1,4 +1,4 @@
-package br.com.sistemapizzaria.SistemaparaPizzaria.dto;
+package br.com.sistemapizzaria.SistemaparaPizzaria.dto.Pizza;
 
 public class PizzaDto {
 

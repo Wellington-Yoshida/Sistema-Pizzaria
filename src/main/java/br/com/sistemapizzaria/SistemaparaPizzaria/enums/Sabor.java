@@ -2,9 +2,9 @@ package br.com.sistemapizzaria.SistemaparaPizzaria.enums;
 
 public enum Sabor {
 
-    CALABRESA("CALABRESA"),
-    MARGUERITA("MARGUERITA"),
-    PORTUGUESA("PORTUGUESA");
+    CALABRESA("Calabresa"),
+    MARGUERITA("Marguerita"),
+    PORTUGUESA("Portuguesa");
 
     private String sabor;
 

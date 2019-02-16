@@ -1,5 +1,7 @@
 package br.com.sistemapizzaria.SistemaparaPizzaria.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -14,11 +16,9 @@ public class Pizza implements Serializable {
     private Long id;
 
     @Column(name = "TAMANHO")
-    @NotNull
     private String tamanho;
 
     @Column(name = "SABOR")
-    @NotNull
     private String sabor;
 
     @Column(name = "TEMPO_PREPARO")
@@ -31,6 +31,7 @@ public class Pizza implements Serializable {
     private Double valorPizza;
 
     @OneToMany(mappedBy = "pizza", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Adicional> adicionalList;
 
     public String getTamanho() {

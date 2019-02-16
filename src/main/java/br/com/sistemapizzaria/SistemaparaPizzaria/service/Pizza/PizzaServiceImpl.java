@@ -1,8 +1,8 @@
-package br.com.sistemapizzaria.SistemaparaPizzaria.service;
+package br.com.sistemapizzaria.SistemaparaPizzaria.service.Pizza;
 
-import br.com.sistemapizzaria.SistemaparaPizzaria.Repository.PizzaRepository;
-import br.com.sistemapizzaria.SistemaparaPizzaria.dto.PizzaDto;
-import br.com.sistemapizzaria.SistemaparaPizzaria.dto.PizzaDtoComTempoEPreco;
+import br.com.sistemapizzaria.SistemaparaPizzaria.Repository.Pizza.PizzaRepository;
+import br.com.sistemapizzaria.SistemaparaPizzaria.dto.Pizza.PizzaDto;
+import br.com.sistemapizzaria.SistemaparaPizzaria.dto.Pizza.PizzaDtoComTempoEPreco;
 import br.com.sistemapizzaria.SistemaparaPizzaria.model.Pizza;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

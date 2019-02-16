@@ -1,4 +1,4 @@
-package br.com.sistemapizzaria.SistemaparaPizzaria.Repository;
+package br.com.sistemapizzaria.SistemaparaPizzaria.Repository.Pizza;
 
 import br.com.sistemapizzaria.SistemaparaPizzaria.model.Pizza;
 import org.springframework.beans.factory.annotation.Autowired;
