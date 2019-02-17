@@ -6,7 +6,7 @@ import java.util.List;
 public class AdicionalDto {
 
     private String pizza_id;
-    private List<String> personalizações = new ArrayList<String>();
+    private List<String> personalizacoes = new ArrayList<String>();
 
     public String getPizza_id() {
         return pizza_id;
@@ -16,11 +16,15 @@ public class AdicionalDto {
         this.pizza_id = pizza_id;
     }
 
-    public List<String> getPersonalizações() {
-        return personalizações;
+    public List<String> getPersonalizacoes() {
+        return personalizacoes;
     }
 
-    public void setPersonalizações(List<String> personalizações) {
-        this.personalizações = personalizações;
+    public void setPersonalizacoes(List<String> personalizacoes) {
+        this.personalizacoes = personalizacoes;
+    }
+
+    public void addPersonalizacoes(String adicional){
+        this.getPersonalizacoes().add(adicional);
     }
 }

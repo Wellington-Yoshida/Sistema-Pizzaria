@@ -1,11 +1,16 @@
 package br.com.sistemapizzaria.SistemaparaPizzaria.Repository.Adicional;
 
 import br.com.sistemapizzaria.SistemaparaPizzaria.model.Adicional;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+
 
 @Repository
 public class AdicionalRepositoryImpl implements AdicionalRepository {

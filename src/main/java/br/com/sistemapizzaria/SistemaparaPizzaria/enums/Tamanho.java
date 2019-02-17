@@ -2,9 +2,9 @@ package br.com.sistemapizzaria.SistemaparaPizzaria.enums;
 
 public enum Tamanho {
 
-    PEQUENA("PEQUENA"),
-    MEDIA("MEDIA"),
-    GRANDE("GRANDE");
+    PEQUENA("Pequena"),
+    MEDIA("Media"),
+    GRANDE("Grande");
 
     private String tamanho;
 

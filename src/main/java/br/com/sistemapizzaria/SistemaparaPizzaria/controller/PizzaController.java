@@ -1,6 +1,5 @@
 package br.com.sistemapizzaria.SistemaparaPizzaria.controller;
 
-import br.com.sistemapizzaria.SistemaparaPizzaria.Response.Response;
 import br.com.sistemapizzaria.SistemaparaPizzaria.dto.Pizza.PizzaDto;
 import br.com.sistemapizzaria.SistemaparaPizzaria.dto.Pizza.PizzaDtoComTempoEPreco;
 import br.com.sistemapizzaria.SistemaparaPizzaria.model.Pizza;

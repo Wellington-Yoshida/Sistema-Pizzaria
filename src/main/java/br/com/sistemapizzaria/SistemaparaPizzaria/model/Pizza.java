@@ -34,6 +34,15 @@ public class Pizza implements Serializable {
     @JsonIgnore
     private List<Adicional> adicionalList;
 
+    public Pizza() {}
+
+    public Pizza(String tamanho, String sabor, String tempoPreparo, Double valorPizza) {
+        this.tamanho = tamanho;
+        this.sabor = sabor;
+        this.tempoPreparo = tempoPreparo;
+        this.valorPizza = valorPizza;
+    }
+
     public String getTamanho() {
         return tamanho;
     }
@@ -80,5 +89,13 @@ public class Pizza implements Serializable {
 
     public void setAdicionalList(List<Adicional> adicionalList) {
         this.adicionalList = adicionalList;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

@@ -18,6 +18,15 @@ public class Adicional implements Serializable {
     @JoinColumn(name = "pizza_id")
     private Pizza pizza;
 
+    public Adicional() {
+    }
+
+    public Adicional(Long id, String personalizacao, Pizza pizza) {
+        this.id = id;
+        this.personalizacao = personalizacao;
+        this.pizza = pizza;
+    }
+
     public String getPersonalizacao() {
         return personalizacao;
     }
@@ -32,5 +41,13 @@ public class Adicional implements Serializable {
 
     public void setPizza(Pizza pizza) {
         this.pizza = pizza;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

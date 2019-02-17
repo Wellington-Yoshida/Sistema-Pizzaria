@@ -2,7 +2,7 @@ package br.com.sistemapizzaria.SistemaparaPizzaria.dto.Adicional;
 
 public class AdicinalPersonalizadoDto extends AdicionalDto{
 
-    private Double valorAdicional;
+    private Double valorAdicional = 0.0;
     private String tempoAdicional;
 
     public Double getValorAdicional() {
@@ -22,6 +22,6 @@ public class AdicinalPersonalizadoDto extends AdicionalDto{
     }
 
     public void addPersonalizacao(String adicional){
-        this.getPersonalizações().add(adicional);
+        this.getPersonalizacoes().add(adicional);
     }
 }

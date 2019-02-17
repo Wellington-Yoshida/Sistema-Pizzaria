@@ -2,29 +2,26 @@ package br.com.sistemapizzaria.SistemaparaPizzaria.service.Adicional;
 
 import br.com.sistemapizzaria.SistemaparaPizzaria.Repository.Adicional.AdicionalRepository;
 import br.com.sistemapizzaria.SistemaparaPizzaria.Repository.Pizza.PizzaRepository;
-import br.com.sistemapizzaria.SistemaparaPizzaria.arquivosuteis.Personalizacao;
 import br.com.sistemapizzaria.SistemaparaPizzaria.dto.Adicional.AdicinalPersonalizadoDto;
 import br.com.sistemapizzaria.SistemaparaPizzaria.dto.Adicional.AdicionalDto;
+import br.com.sistemapizzaria.SistemaparaPizzaria.dto.DetalhePedidoDto;
 import br.com.sistemapizzaria.SistemaparaPizzaria.model.Adicional;
 import br.com.sistemapizzaria.SistemaparaPizzaria.model.Pizza;
 import br.com.sistemapizzaria.SistemaparaPizzaria.service.Pizza.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.NumberUtils;
 import org.springframework.util.ObjectUtils;
-import sun.util.calendar.CalendarDate;
-import sun.util.calendar.CalendarUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.function.Predicate;
 
 import static br.com.sistemapizzaria.SistemaparaPizzaria.arquivosuteis.Personalizacao.BANCON_EXTRA;
 import static br.com.sistemapizzaria.SistemaparaPizzaria.arquivosuteis.Personalizacao.BORDA_RECHEADA;
+import static br.com.sistemapizzaria.SistemaparaPizzaria.arquivosuteis.TimeFormat._HH_mm;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static java.lang.Long.parseLong;
@@ -71,15 +68,15 @@ public class AdicionalServiceImpl implements AdicionalService {
     }
 
     private boolean verificaAdicionais(AdicionalDto adicionalDto) {
-        return (validaPizzaIDIsNotNull.test(adicionalDto.getPizza_id()) && validaAdicionaisIsNotNull.test(adicionalDto.getPersonalizações())) ? TRUE : FALSE;
+        return (validaPizzaIDIsNotNull.test(adicionalDto.getPizza_id()) && validaAdicionaisIsNotNull.test(adicionalDto.getPersonalizacoes())) ? TRUE : FALSE;
     }
 
     @Override
-    public AdicinalPersonalizadoDto validaPernalizacao(AdicionalDto adicionalDto) {
+    public AdicinalPersonalizadoDto validaPersonalizacao(AdicionalDto adicionalDto) {
         AdicinalPersonalizadoDto adicinalPersonalizadoDto = new AdicinalPersonalizadoDto();
         if (verificaAdicionais(adicionalDto)) {
             adicinalPersonalizadoDto.setPizza_id(adicionalDto.getPizza_id());
-            addPersonalizacoes(adicionalDto.getPersonalizações(), adicinalPersonalizadoDto);
+            addPersonalizacoes(adicionalDto.getPersonalizacoes(), adicinalPersonalizadoDto);
         }
         return adicinalPersonalizadoDto;
     }
@@ -90,16 +87,29 @@ public class AdicionalServiceImpl implements AdicionalService {
         atualizaPizza(pizza, adicinalPersonalizadoDto);
         adicional.setPizza(pizza);
         adicional.setPersonalizacao("");
-        adicinalPersonalizadoDto.getPersonalizações().forEach(p -> {
-            adicional.setPersonalizacao(adicional.getPersonalizacao().concat(p).concat(","));
+        adicinalPersonalizadoDto.getPersonalizacoes().forEach(p -> {
+            adicional.setPersonalizacao(adicional.getPersonalizacao().concat(p).concat(", "));
         });
         return adicional;
+    }
+
+    private DetalhePedidoDto converteListParaDetalhePedidoDto(Adicional a, Pizza p) {
+
+        return null;
+    }
+
+    @Override
+    public AdicionalDto converteAdicinalParaDto(Adicional adicional) {
+        final AdicionalDto adicionalDto = new AdicionalDto();
+        adicionalDto.setPizza_id(adicional.getPizza().getId().toString());
+        adicionalDto.addPersonalizacoes(adicional.getPersonalizacao());
+        return adicionalDto;
     }
 
     private void atualizaPizza(Pizza pizza, AdicinalPersonalizadoDto adicinalPersonalizadoDto) {
         Double valorPizza = adicinalPersonalizadoDto.getValorAdicional() + pizza.getValorPizza();
         pizza.setValorTotal(valorPizza);
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat(_HH_mm);
         try {
             Date tempo = sdf.parse(adicinalPersonalizadoDto.getTempoAdicional());
             Date tempoPizza = sdf.parse(pizza.getTempoPreparo());
@@ -123,4 +133,6 @@ public class AdicionalServiceImpl implements AdicionalService {
             adicinalPersonalizadoDto.addPersonalizacao(p);
         });
     }
+
+
 }
